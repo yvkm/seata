@@ -144,7 +144,7 @@ public class NacosRegistryServiceImpl implements RegistryService<EventListener> 
                     }
                     subscribe(clusterName, event -> {
                         List<Instance> instances = ((NamingEvent) event).getInstances();
-                        if (null == instances && null != CLUSTER_ADDRESS_MAP.get(clusterName)) {
+                        if (CollectionUtils.isEmpty(instances) && null != CLUSTER_ADDRESS_MAP.get(clusterName)) {
                             CLUSTER_ADDRESS_MAP.remove(clusterName);
                         } else if (!CollectionUtils.isEmpty(instances)) {
                             List<InetSocketAddress> newAddressList = instances.stream()
